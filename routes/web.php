@@ -1,13 +1,10 @@
 <?php
 
 Route::get('/', 'StaticPagesController@home')->name('home');
-
 Route::get('/help', 'StaticPagesController@help')->name('help');
-
 Route::get('/about', 'StaticPagesController@about')->name('about');
 
 Route::get('signup', 'UsersController@create')->name('signup');
-
 Route::resource('users', 'UsersController');
 
 /*以上资源路由等同于以下代码
@@ -28,3 +25,6 @@ Route::patch('/users/{user}', 'UsersController@update')->name('users.update');
 Route::delete('/users/{user}', 'UsersController@destroy')->name('users.destroy');
 
 */
+Route::get('login', 'SessionsController@create')->name('login');
+Route::post('login', 'SessionsController@store')->name('login');
+Route::delete('logout', 'SessionsController@destroy')->name('logout');
