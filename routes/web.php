@@ -29,3 +29,12 @@ Route::get('login', 'SessionsController@create')->name('login');
 Route::post('login', 'SessionsController@store')->name('login');
 Route::delete('logout', 'SessionsController@destroy')->name('logout');
 Route::get('signup/confirm/{token}', 'UsersController@confirmEmail')->name('confirm_email');
+/*重设密码路由*/
+/*显示页面*/
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+/*发送邮件*/
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+/*用户修改路由*/
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+/*提交重置密码*/
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');

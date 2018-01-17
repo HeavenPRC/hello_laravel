@@ -111,8 +111,8 @@ class UsersController extends Controller
     {
         $view = 'emails.confirm';//选择发送的模板文件
         $data = compact('user');//向模板传输的数据
-        $from = 'aufree@yousails.com';//发送者
-        $name = 'Aufree';//
+        $from = '1353772647@qq.com';//发送者
+        $name = 'Heaven';//
         $to = $user->email;//接收者
         $subject = "感谢注册 Sample 应用！请确认你的邮箱。";//主题
 
