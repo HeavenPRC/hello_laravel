@@ -32,13 +32,20 @@ class UsersController extends Controller
     	return view('users.create');
     }
 
+    /**
+     * show oneself blogs
+     * @return [type] [description]
+     */
     public function show(User $user)
     {
-        return view('users.show', compact('user'));
+        $statuses = $user->statuses()
+                           ->orderBy('created_at', 'desc')
+                           ->paginate(30);
+        return view('users.show', compact('user', 'statuses'));
     }
 
     /**
-     * 表单限制
+     * 注册
      * @param  Request $request [description]
      * @return [type]           [description]
      */
@@ -137,5 +144,6 @@ class UsersController extends Controller
         session()->flash('success', '恭喜你，激活成功！');
         return redirect()->route('users.show', [$user]);
     }
+
 
 }
