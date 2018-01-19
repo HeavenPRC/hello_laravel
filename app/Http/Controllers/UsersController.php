@@ -74,7 +74,7 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         //$this->authorize('update', $user);
-        if(!\Auth::user()->can('update', $user))
+        if(!Auth::user()->can('update', $user))
         {
           //return view('users.edit', ['user' => \Auth::user()]);
           return redirect()->route('users.edit', [\Auth::user()]);
@@ -145,5 +145,17 @@ class UsersController extends Controller
         return redirect()->route('users.show', [$user]);
     }
 
+    public function followings(User $user)
+    {
+        $users = $user->followers()->paginate(30);
+        $title = '关注的人';
+        return view('users.show_follow', compact('users', 'title'));
+    }
 
+    public function followers(User $user)
+    {
+        $users = $user->followers()->paginate(30);
+        $title = '粉丝';
+        return view('users.show_follow', compact('users', 'title'));
+    }
 }
